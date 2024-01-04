@@ -11,8 +11,8 @@ package model.dao;
  */
 public class DaoFactory {
     
-    public static ContatoDaoJpa novoContatoDAO() throws Exception {
-        return new ContatoDaoJpa();
+    public static ClienteDaoJpa novoClienteDAO() throws Exception {
+        return new ClienteDaoJpa();
     }
     
 }
