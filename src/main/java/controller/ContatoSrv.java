@@ -14,8 +14,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Contato;
-import model.dao.ContatoDaoJpa;
+import model.Cliente;
+import model.dao.ClienteDaoJpa;
 import model.dao.InterfaceDao;
 
 /**
@@ -38,21 +38,27 @@ public class ContatoSrv extends HttpServlet {
 
         try {
             String acao = request.getParameter("acao");
+            
 
             String id = request.getParameter("id");
             String nome = request.getParameter("nome");
             String email = request.getParameter("email");
             String telefone = request.getParameter("telefone");
-            InterfaceDao dao = new ContatoDaoJpa();
+            InterfaceDao dao = new ClienteDaoJpa();
             RequestDispatcher rd;
-            Contato c = null;
-
+            Cliente c = null;
+            
             //System.out.println(acao);
             //System.out.println(nome);
 
+            
+     
+
+
+
             switch (acao) {
                 case "inclusao":
-                    c = new Contato(nome, email, telefone);
+                    c = new Cliente(nome, email, telefone);
                     try {
                         dao.incluir(c);
                     } catch (Exception ex) {
@@ -63,7 +69,7 @@ public class ContatoSrv extends HttpServlet {
                     break;
 
                 case "pre-edicao":
-                    c = (Contato) dao.pesquisarPorId(Integer.parseInt(id));
+                    c = (Cliente) dao.pesquisarPorId(Integer.parseInt(id));
                     rd = request.getRequestDispatcher("Formulario.jsp?acao=edicao"
                             + "&id=" + c.getId()
                             + "&nome=" + c.getNome()
@@ -73,7 +79,7 @@ public class ContatoSrv extends HttpServlet {
                     break;
 
                 case "edicao":
-                    c = new Contato(nome, email, telefone);
+                    c = new Cliente(nome, email, telefone);
                     c.setId(Integer.parseInt(id));
                     try {
                         dao.editar(c);
@@ -86,7 +92,7 @@ public class ContatoSrv extends HttpServlet {
 
                 case "exclusao":
                     try {
-                    c = new Contato();
+                    c = new Cliente();
                     c.setId(Integer.parseInt(id));
                     dao.excluir(c);
                 } catch (Exception ex) {
@@ -112,15 +118,15 @@ public class ContatoSrv extends HttpServlet {
     }
 
     private String listagem() {
-        InterfaceDao dao = new ContatoDaoJpa();
-        List<Contato> lista = null;
+        InterfaceDao dao = new ClienteDaoJpa();
+        List<Cliente> lista = null;
         try {
             lista = dao.listar();
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
         String listaHTML = "";
-        for (Contato contato : lista) {
+        for (Cliente contato : lista) {
             listaHTML = listaHTML
                     + "<tr>"
                     + "<td>" + contato.getNome() + "</td>"
@@ -140,15 +146,15 @@ public class ContatoSrv extends HttpServlet {
     }
 
     private String listagemFiltrada(String nome) {
-        InterfaceDao dao = new ContatoDaoJpa();
-        List<Contato> lista = null;
+        InterfaceDao dao = new ClienteDaoJpa();
+        List<Cliente> lista = null;
         try {
             lista = dao.filtrarPorNome(nome);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
         String listaHTML = "";
-        for (Contato contato : lista) {
+        for (Cliente contato : lista) {
             listaHTML = listaHTML
                     + "<tr>"
                     + "<td>" + contato.getNome() + "</td>"

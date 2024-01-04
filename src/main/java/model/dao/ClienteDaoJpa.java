@@ -8,16 +8,16 @@ package model.dao;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import model.Contato;
+import model.Cliente;
 
 /**
  *
  * @author lefoly
  */
-public class ContatoDaoJpa implements InterfaceDao<Contato> {
+public class ClienteDaoJpa implements InterfaceDao<Cliente> {
 
     @Override
-    public void incluir(Contato entidade) throws Exception {
+    public void incluir(Cliente entidade) throws Exception {
         EntityManager em = ConnFactory.getEntityManager();
         try {
             em.getTransaction().begin();
@@ -29,7 +29,7 @@ public class ContatoDaoJpa implements InterfaceDao<Contato> {
     }
 
     @Override
-    public void editar(Contato entidade) throws Exception {
+    public void editar(Cliente entidade) throws Exception {
         EntityManager em = ConnFactory.getEntityManager();
         try {
             em.getTransaction().begin();
@@ -41,12 +41,12 @@ public class ContatoDaoJpa implements InterfaceDao<Contato> {
     }
 
     @Override
-    public void excluir(Contato entidade) throws Exception {
+    public void excluir(Cliente entidade) throws Exception {
         EntityManager em = ConnFactory.getEntityManager();
         try {
             em.getTransaction().begin();
 
-            Contato c1 = em.find(Contato.class, entidade.getId());
+            Cliente c1 = em.find(Cliente.class, entidade.getId());
             em.remove(c1);
 
             em.getTransaction().commit();
@@ -56,13 +56,13 @@ public class ContatoDaoJpa implements InterfaceDao<Contato> {
     }
 
     @Override
-    public Contato pesquisarPorId(int id) throws Exception {
-        Contato c = null;
+    public Cliente pesquisarPorId(int id) throws Exception {
+        Cliente c = null;
         EntityManager em = ConnFactory.getEntityManager();
         try {
             em.getTransaction().begin();
 
-            c = em.find(Contato.class, id);
+            c = em.find(Cliente.class, id);
 
             em.getTransaction().commit();
         } finally {
@@ -72,12 +72,12 @@ public class ContatoDaoJpa implements InterfaceDao<Contato> {
     }
 
     @Override
-    public List<Contato> listar() throws Exception {
-        List<Contato> lista = null;
+    public List<Cliente> listar() throws Exception {
+        List<Cliente> lista = null;
         EntityManager em = ConnFactory.getEntityManager();
         try {
             em.getTransaction().begin();
-            lista = em.createQuery("FROM Contato c").getResultList();
+            lista = em.createQuery("FROM Cliente c").getResultList();
             em.getTransaction().commit();
         } finally {
             em.close();
@@ -86,12 +86,12 @@ public class ContatoDaoJpa implements InterfaceDao<Contato> {
     }
 
     @Override
-    public List<Contato> filtrarPorNome(String nome) throws Exception {
+    public List<Cliente> filtrarPorNome(String nome) throws Exception {
         EntityManager em = ConnFactory.getEntityManager();
 
-        Query query = em.createNamedQuery("Contato.filtrarPorNome");
+        Query query = em.createNamedQuery("Cliente.filtrarPorNome");
         query.setParameter("nome", nome);
-        List<Contato> resultado = query.getResultList();
+        List<Cliente> resultado = query.getResultList();
         return resultado;
     }
 

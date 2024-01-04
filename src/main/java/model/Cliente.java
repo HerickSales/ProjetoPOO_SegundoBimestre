@@ -5,6 +5,7 @@
  */
 package model;
 
+import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,11 +18,11 @@ import javax.persistence.NamedQuery;
  */
 
 @NamedQuery(
-        name="Contato.filtrarPorNome", 
-        query="SELECT c FROM Contato c WHERE c.nome like CONCAT('%',:nome,'%')")
+        name="Cliente.filtrarPorNome", 
+        query="SELECT c FROM Cliente c WHERE c.nome like CONCAT('%',:nome,'%')")
 
 @Entity
-public class Contato {
+public class Cliente {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -30,10 +31,10 @@ public class Contato {
     private String email;
     private String telefone;
 
-    public Contato() {
+    public Cliente() {
     }
 
-    public Contato(String nome, String email, String telefone) {
+    public Cliente(String nome, String email, String telefone) {
         this.nome = nome;
         this.email = email;
         this.telefone = telefone;
