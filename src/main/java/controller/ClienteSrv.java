@@ -11,6 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,7 +23,8 @@ import model.dao.InterfaceDao;
  *
  * @author lefoly
  */
-public class ContatoSrv extends HttpServlet {
+
+public class ClienteSrv extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,15 +40,19 @@ public class ContatoSrv extends HttpServlet {
 
         try {
             String acao = request.getParameter("acao");
-            
-
             String id = request.getParameter("id");
             String nome = request.getParameter("nome");
             String email = request.getParameter("email");
             String telefone = request.getParameter("telefone");
+            
+            System.out.println("*****************************");
+            System.out.println(acao+ nome+id+email+telefone);
+            System.out.println("*****************************");
+          
             InterfaceDao dao = new ClienteDaoJpa();
             RequestDispatcher rd;
             Cliente c = null;
+            
             
             //System.out.println(acao);
             //System.out.println(nome);
@@ -64,9 +70,11 @@ public class ContatoSrv extends HttpServlet {
                     } catch (Exception ex) {
                         System.out.println(ex.getMessage());
                     }
-                    rd = request.getRequestDispatcher("Listagem.jsp?lista=" + listagem());
-                    rd.forward(request, response);
+                    //rd = request.getRequestDispatcher("Listagem.jsp?lista=" + listagem());
+                    //rd.forward(request, response);
                     break;
+                    
+                
 
                 case "pre-edicao":
                     c = (Cliente) dao.pesquisarPorId(Integer.parseInt(id));
@@ -113,7 +121,7 @@ public class ContatoSrv extends HttpServlet {
                     break;
             }
         } catch (Exception ex) {
-            Logger.getLogger(ContatoSrv.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ClienteSrv.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -126,19 +134,19 @@ public class ContatoSrv extends HttpServlet {
             System.out.println(ex.getMessage());
         }
         String listaHTML = "";
-        for (Cliente contato : lista) {
+        for (Cliente cliente : lista) {
             listaHTML = listaHTML
                     + "<tr>"
-                    + "<td>" + contato.getNome() + "</td>"
-                    + "<td>" + contato.getEmail() + "</td>"
-                    + "<td>" + contato.getTelefone() + "</td>"
-                    + "<td><form action=ContatoSrv?acao=pre-edicao method='POST'>"
+                    + "<td>" + cliente.getNome() + "</td>"
+                    + "<td>" + cliente.getEmail() + "</td>"
+                    + "<td>" + cliente.getTelefone() + "</td>"
+                    + "<td><form action=cliente?acao=pre-edicao method='POST'>"
                     + "<input type='hidden' name='id' value="
-                    + contato.getId() + "><input type='submit' value=editar>"
+                    + cliente.getId() + "><input type='submit' value=editar>"
                     + "</form></td>"
-                    + "<form action=ContatoSrv?acao=exclusao method='POST'>"
+                    + "<form action=clienteSrv?acao=exclusao method='POST'>"
                     + "<td><input type='hidden' name='id' value="
-                    + contato.getId() + "><input type='submit' value=excluir></td>"
+                    + cliente.getId() + "><input type='submit' value=excluir></td>"
                     + "</form>"
                     + "</tr>";
         }
@@ -154,19 +162,19 @@ public class ContatoSrv extends HttpServlet {
             System.out.println(ex.getMessage());
         }
         String listaHTML = "";
-        for (Cliente contato : lista) {
+        for (Cliente cliente : lista) {
             listaHTML = listaHTML
                     + "<tr>"
-                    + "<td>" + contato.getNome() + "</td>"
-                    + "<td>" + contato.getEmail() + "</td>"
-                    + "<td>" + contato.getTelefone() + "</td>"
-                    + "<td><form action=ContatoSrv?acao=pre-edicao method='POST'>"
+                    + "<td>" + cliente.getNome() + "</td>"
+                    + "<td>" + cliente.getEmail() + "</td>"
+                    + "<td>" + cliente.getTelefone() + "</td>"
+                    + "<td><form action=cliente?acao=pre-edicao method='POST'>"
                     + "<input type='hidden' name='id' value="
-                    + contato.getId() + "><input type='submit' value=editar>"
+                    + cliente.getId() + "><input type='submit' value=editar>"
                     + "</form></td>"
-                    + "<form action=ContatoSrv?acao=exclusao method='POST'>"
+                    + "<form action=clienteSrv?acao=exclusao method='POST'>"
                     + "<td><input type='hidden' name='id' value="
-                    + contato.getId() + "><input type='submit' value=excluir></td>"
+                    + cliente.getId() + "><input type='submit' value=excluir></td>"
                     + "</form>"
                     + "</tr>";
         }

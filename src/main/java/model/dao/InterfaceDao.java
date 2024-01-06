@@ -24,4 +24,6 @@ public interface InterfaceDao<T> {
     public abstract List<T> listar() throws Exception;
     
     public abstract List<T> filtrarPorNome(String nome) throws Exception;
+    
+    public abstract List<T> filtrarPorTitulo(String titulo) throws Exception;
 }

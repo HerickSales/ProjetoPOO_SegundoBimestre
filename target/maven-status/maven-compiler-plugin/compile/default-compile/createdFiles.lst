@@ -1,2 +1,8 @@
+controller\ClienteSrv.class
+model\dao\DaoFactory.class
 model\dao\ClienteDaoJpa.class
 model\Cliente.class
+model\dao\LivroDaoJpa.class
+model\dao\ConnFactory.class
+model\dao\InterfaceDao.class
+model\Livro.class

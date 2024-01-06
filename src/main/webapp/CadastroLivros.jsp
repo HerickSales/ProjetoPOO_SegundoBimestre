@@ -10,86 +10,99 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Dados do Cliente</title>
+        <title>CadastroLivros</title>
+                <link rel="stylesheet" href=""/>
+        <link
+            href="https://fonts.googleapis.com/icon?family=Material+Icons"
+            rel="stylesheet"
+            />
+        <link rel="stylesheet" href="styles.css" type="text/css">
     </head>
 
     <%
-        String acao = request.getParameter("acao");
-        String id = request.getParameter("id");
-        ArrayList<String> listAtributos=new ArrayList<>();
-        //Atributos de clientes
-        String nome= request.getParameter("nome");
-        String email= request.getParameter("email");
-        String telefone= request.getParameter("telefone");
-        //atributos de Livro
-        String titulo= request.getParameter("titulo");
-        String autor= request.getParameter("autor");
-        String preco= request.getParameter("preco");
-        //campos
-        String campo1="";   
-        String campo2="";
-        String campo3="";
-        
-        if(id==null){
-        nome="";
-        email="";
-        telefone="";
-        titulo="";
-        autor="";
-        preco="";
-        }
-        
-        switch (acao){
-            case "inclusaoL":
-                campo1= "Titulo";
-                campo2="Autor";
-                campo3= "Preço";
-                break;
-            case "inclusaoC":
-                campo1= "Nome";
-                campo2="Email";
-                campo3= "Telefone";
-                break;
-                
-            default:
-                break;
-        }
-        
-
-
-
+            String id= request.getParameter("id");
+            String titulo=request.getParameter("titulo");
+            String autor=request.getParameter("autor");
+            String preco= request.getParameter("preco");
     %>
 
     <body>
-        <h3>Dados do Cliente</h3>
-         
-        <div>   
-            <form action="ContatoSrv" method="POST">
-                <table border="0">
-                    <tbody>
-                        <tr>
-                            <td><input type="hidden" name="acao" value="<%=acao%>" /></td>
-                        </tr>
-                        <tr>
-                            <td><input type="hidden" name="id" value="<%=id%>" /></td>
-                        </tr>
-                        <tr>
-                            <td><%=campo1%>: </td>
-                            <td><input type="text" name="<%=campo1%>" value="<%=("inclusaoL".equals(acao)?titulo:nome)%>" /></td>
-                        </tr>
-                        <tr>
-                            <td><%=campo2%>: </td>
-                            <td><input type="text" name="<%=campo2%>" value="<%=("inclusaoL".equals(acao)?autor:email)%>" /></td>
-                        </tr>
-                        <tr>
-                            <td><%=campo3%>: </td>
-                            <td><input type="text" name="<%=campo3%>" value="<%=("inclusaoL".equals(acao)?preco:telefone)%>" /></td>
-                        </tr>
-                    </tbody>
-                </table>
-                <input type="submit" value="Gravar" />
-                <input type="reset" value="Limpar" />
-            </form>
+        <div class="content">
+            <nav class="navbar">
+                <a href="index.html" class="logo" href="#">
+                    <i class="material-icons">dataset</i>
+                </a>
+                <div>
+                    <ul class="navlinks">
+                        <li>
+                            <a><i class="material-icons">book</i></a>
+                            <div class="tooltip">Livros</div>
+                        </li>
+                        <li>
+                            <a href="CadastroClientes.jsp?acao=inclusao"><i class="material-icons">contacts</i></a>
+                            <div class="tooltip">Clientes</div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <main>
+                <div class="container">
+                    <div class="header">
+                        <h1>Livros</h1>
+
+                            <button id="btnCadastrar" onclick="modal.style.display='block';">
+                                <span> Cadastrar Livro </span>
+                            </button>
+                    </div>
+                    <div id="modal" class="modal">
+                        <div class="modal-container">
+                            <div class="modal-header-style">
+                                <div class="modal-header">
+                                    <h1>Cadastro de Livros</h1>
+                                    <button class="modal-close" id="btnModalClose" onclick="modal.style.display='none'">
+                                        <i class="material-icons">close</i>
+                                    </button>
+                                </div>
+                                <p>Preencha os campos abaixo:</p>
+                            </div>
+
+                            <div class="modal-content">
+                                <label for="inpTitulo">Título</label>
+                                <input type="text" id="inpTitulo" />
+
+                                <label for="inpAutor">Autor</label>
+                                <input type="text" id="inpAutor" />
+
+
+                                <label for="inpValor">Preco</label>
+                                <input type="number" id="inpValor" />
+
+                                <button id="btnSalvar">
+                                    <span><i class="material-icons">save</i></span>
+                                    <span>Salvar Registro</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr />
+
+                    <div class="table-content">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Título</th>
+                                    <th>Autor(es)</th>
+                                    <th>Preço</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="bodyLivros"></tbody>
+                        </table>
+                    </div>
+                    
+                </div>
+            </main>
         </div>
     </body>
 </html>
