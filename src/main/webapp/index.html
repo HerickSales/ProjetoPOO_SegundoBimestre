@@ -1,10 +1,8 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+
+
 <html lang="pt-br">
+
     <head>
         <title>Livraria</title>
         <meta charset="UTF-8" />
@@ -14,55 +12,91 @@ and open the template in the editor.
             href="https://fonts.googleapis.com/icon?family=Material+Icons"
             rel="stylesheet"
             />
+        <link rel="stylesheet" href="styles.css" type="text/css">
+
     </head>
+
     <body>
-        <div >
+        <div class="content">
+            <nav class="navbar">
+                <a class="logo" href="#">
+                    <i class="material-icons">dataset</i>
+                </a>
+                <div>
+                    <ul class="navlinks">
+                        <li>
+                            <a href="CadastroLivros.jsp?acao=inclusao"><i class="material-icons">book</i></a>
+                            <div class="tooltip">Livros</div>
+                        </li>
+                        <li>
+                            <a href="CadastroClientes.jsp?acao=inclusao"><i class="material-icons">contacts</i></a>
+                            <div class="tooltip">Clientes</div>
+                        </li>
+
+                    </ul>
+                </div>
+            </nav>
             <main>
-                <div >
-                    <div >
-                        <h1>Livros</h1>
-                        <button id="btnCadastrar" onClick="window.location.href = 'Formulario.jsp?acao=inclusaoL'">
+                <div class="container">
+                    <div class="header">
+                        <h1>Vendas</h1>
 
-                            <span><i class="material-icons">add</i></span>
-                            <span> Cadastrar Livro </span>    
-                        </button>
-                        
-                        <button  onClick="window.location.href = 'Formulario.jsp?acao=inclusaoC'">
+                            <button id="btnCadastrar" onclick="modal.style.display='block'">
+                                <span> Emprestar Livro </span>
+                            </button>
 
-                            <span><i class="material-icons">add</i></span>
-                            <span> Cadastrar Cliente </span>    
-
-                        </button>
-                        <button  onClick="window.location.href = 'Formulario.jsp?acao=Emprestar'">
-
-                            <span><i class="material-icons">add</i></span>
-                            <span> Realizar Emprestimo </span>    
-
-                        </button>
                     </div>
+                    <div id="modal" class="modal">
+                        <div class="modal-container">
+                            <div class="modal-header-style">
+                                <div class="modal-header">
+                                    <h1>Cadastro de Livros</h1>
+                                    <button class="modal-close" id="btnModalClose" onclick="modal.style.display='none'">
+                                        <i class="material-icons">close</i>
+                                    </button>
+                                </div>
+                                <p>Preencha os campos abaixo:</p>
+                            </div>
+
+                            <div class="modal-content">
+                                <label for="inpTitulo">cliente</label>
+                                <input type="text" id="inpTitulo" />
+
+                                <label for="inpAutor">Livro</label>
+                                <input type="text" id="inpAutor" />
+
+                                <label for="inpGenero">Data Devolucao</label>
+                                <input type="date" id="inpGenero" />
+
+                                <button id="btnSalvar">
+                                    <span><i class="material-icons">save</i></span>
+                                    <span>Salvar Registro</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
                     <hr />
 
-                    <div>
+                    <div class="table-content">
                         <table>
                             <thead>
                                 <tr>
-                                    <th>Código</th>
-                                    <th>Título</th>
-                                    <th>Autor(es)</th>
-                                    <th>Gênero</th>
-                                    <th>Editora</th>
-                                    <th>Valor</th>
-                                   
+                                    <th>Livro</th>
+                                    <th>Cliente</th>
+                                    <th>data de Devolucao</th>
                                 </tr>
                             </thead>
 
-                            <tbody id="bodyLivros">
-
-                            </tbody>
+                            <tbody id="bodyLivros"></tbody>
                         </table>
                     </div>
+                    
                 </div>
             </main>
         </div>
+
+
     </body>
+
 </html>

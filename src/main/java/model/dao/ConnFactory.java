@@ -16,7 +16,8 @@ import javax.persistence.Persistence;
 public class ConnFactory {
 
     public static EntityManager getEntityManager() {
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("AgendaPU");
+            
+        EntityManagerFactory factory = Persistence.createEntityManagerFactory("Biblioteca");
         EntityManager entityManager = factory.createEntityManager();
         return entityManager;
     }

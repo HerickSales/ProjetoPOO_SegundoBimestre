@@ -5,7 +5,7 @@
  */
 package model;
 
-import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,10 +16,9 @@ import javax.persistence.NamedQuery;
  *
  * @author lefoly
  */
-
 @NamedQuery(
-        name="Cliente.filtrarPorNome", 
-        query="SELECT c FROM Cliente c WHERE c.nome like CONCAT('%',:nome,'%')")
+        name = "Cliente.filtrarPorNome",
+        query = "SELECT c FROM Cliente c WHERE c.nome like CONCAT('%',:nome,'%')")
 
 @Entity
 public class Cliente {
@@ -27,8 +26,14 @@ public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
+    
+    @Column(name = "nome")
     private String nome;
+
+    @Column(name = "email")
     private String email;
+
+    @Column(name = "telefone")
     private String telefone;
 
     public Cliente() {
@@ -63,7 +68,7 @@ public class Cliente {
     public void setEmail(String email) {
         this.email = email;
     }
-    
+
     public String getTelefone() {
         return telefone;
     }
@@ -74,8 +79,7 @@ public class Cliente {
 
     @Override
     public String toString() {
-        return "Contato{" + "id=" + id + ", nome=" + nome + ", email=" + email + ", telefone=" + telefone + '}';
+        return "Cliente{" + "id=" + id + ", nome=" + nome + ", email=" + email + ", telefone=" + telefone + '}';
     }
 
-    
 }

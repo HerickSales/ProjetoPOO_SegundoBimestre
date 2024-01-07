@@ -95,4 +95,9 @@ public class ClienteDaoJpa implements InterfaceDao<Cliente> {
         return resultado;
     }
 
+    @Override
+    public List<Cliente> filtrarPorTitulo(String titulo) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
 }
