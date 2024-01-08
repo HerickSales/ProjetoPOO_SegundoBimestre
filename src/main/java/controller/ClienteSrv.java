@@ -105,7 +105,7 @@ public class ClienteSrv extends HttpServlet {
                 } catch (Exception ex) {
                     System.out.println(ex.getMessage());
                 }
-                rd = request.getRequestDispatcher("CadastroClientes.jsp");
+                rd = request.getRequestDispatcher("CadastroClientes.jsp?acao=inclusao");
                 rd.forward(request, response);
                 break;
 
@@ -130,7 +130,7 @@ public class ClienteSrv extends HttpServlet {
         try {
             lista = dao.listar();
         } catch (Exception ex) {
-            System.out.println(ex.getMessage());
+            System.out.println("mensagem de erro:"+ ex.getMessage());
         }
         String listaHTML = "";
         for (Cliente cliente : lista) {
@@ -139,13 +139,13 @@ public class ClienteSrv extends HttpServlet {
                     + "<td>" + cliente.getNome() + "</td>"
                     + "<td>" + cliente.getEmail() + "</td>"
                     + "<td>" + cliente.getTelefone() + "</td>"
-                    + "<td><form action=ClienteSrv?acao=pre-edicao method='POST'>"
+                    + "<td><form action=ClienteSrv?acao=pre-edicao  method='POST'>"
                     + "<input type='hidden' name='id' value="
-                    + cliente.getId() + "><input type='submit' class='btnBody' value=editar>"
+                    + cliente.getId() + "><input type='submit' class='btnBody'    value=editar>"
                     + "<i class=\"material-icons\">assignment</i></form></td>"
                     + "<form action=ClienteSrv?acao=exclusao method='POST'>"
                     + "<td><input type='hidden' name='id' value="
-                    + cliente.getId() + "><input type='submit' class='btnBody'  value='deletar'><i class='material-icons'>delete</i></td>"
+                    + cliente.getId() + "><input type='submit' class='btnBody' value='deletar'><i class='material-icons'>delete</i></td>"
                     + "</form>"
                     + "</tr>";
         }
@@ -168,16 +168,17 @@ public class ClienteSrv extends HttpServlet {
                     + "<td>" + cliente.getNome() + "</td>"
                     + "<td>" + cliente.getEmail() + "</td>"
                     + "<td>" + cliente.getTelefone() + "</td>"
-                    + "<td><form action=cliente?acao=pre-edicao id='preEdit' method='POST'>"
+                    + "<td><form action=cliente?acao=pre-edicao  method='POST'>"
                     + "<input type='hidden' name='id' value="
-                    + cliente.getId() + "><input type='submit'   value=editar>"
+                    + cliente.getId() + "><input type='submit'  value=editar>"
                     + "</form></td>"
                     + "<form action=clienteSrv?acao=exclusao method='POST'>"
                     + "<td><input type='hidden' name='id' value="
-                    + cliente.getId() + "><input type='submit' value=excluir></td>"
+                    + cliente.getId() + "><input type='submit'  value=excluir></td>"
                     + "</form>"
                     + "</tr>";
         }
+        System.out.println("ListaHtml: " + listaHTML);
         return listaHTML;
     }
 

@@ -21,20 +21,23 @@
     </head>
 
     <%
-        
+
+        String acao = request.getParameter("acao");
         String id = request.getParameter("id");
         String nome = request.getParameter("nome");
         String email = request.getParameter("email");
         String telefone = request.getParameter("telefone");
-        if (id == null) {
+        if (id == null||nome==null) {
             nome = "";
             email = "";
             telefone = "";
         }
-       ClienteSrv clientSrv= new ClienteSrv();
-       String list= clientSrv.listagem();
-        
-        
+        ClienteSrv clientSrv = new ClienteSrv();
+        String list = clientSrv.listagem();
+        System.out.println(id+ nome);
+
+
+
     %>
 
     <body>
@@ -61,7 +64,7 @@
                 <div class="container">
                     <div class="header">
                         <h1>Clientes</h1>
-                        <button id="btnCadastrar" onclick="modal.style.display = 'block';">
+                        <button id="btnCadastrar" onclick="showModal()">
                             <span> Cadastrar Livro </span>
                         </button>
 
@@ -72,7 +75,7 @@
                             <div class="modal-header-style">
                                 <div class="modal-header">
                                     <h1>Cadastro de Livros</h1>
-                                    <button class="modal-close" id="btnModalClose" onclick="modal.style.display = 'none'">
+                                    <button class="modal-close" id="btnModalClose" onclick= "limpaCamposCliente()">
                                         <i class="material-icons">close</i>
                                     </button>
                                 </div>
@@ -83,7 +86,7 @@
                                 <div class="modal-content">
                                     <input type="hidden" name="acao" value="inclusao"
 
-                                     <label for="inpTitulo">Nome</label>
+                                           <label for="inpTitulo">Nome</label>
                                     <input type="text" id="nome" name="nome" value="<%=nome%>"/>
 
                                     <label for="inpAutor">Email</label>
@@ -116,9 +119,20 @@
                     </div>
 
                 </div>
+
             </main>
+ <script>
+    let acao= "<%=acao%>";
+    if(acao==="edicao"){
+        modal.style.display='block';
+    }
+    
+    
+    
+</script>
 
         </div>
+        <script src="./funcoes.js"></script>
     </body>
 </html>
 
