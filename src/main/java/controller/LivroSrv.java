@@ -6,12 +6,12 @@ package controller;
  */
 
 import java.io.IOException;
+import static java.lang.Double.parseDouble;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,7 +23,7 @@ import model.dao.LivroDaoJpa;
  *
  * @author heric
  */
-@WebServlet(urlPatterns = {"/LivroSrv"})
+
 public class LivroSrv extends HttpServlet {
 
     /**
@@ -45,7 +45,12 @@ public class LivroSrv extends HttpServlet {
             String id = request.getParameter("id");
             String titulo = request.getParameter("titulo");
             String autor = request.getParameter("autor");
-            String preco = request.getParameter("preco");
+            String precoString = request.getParameter("preco");
+             Double preco= (Double)parseDouble(precoString);
+
+             
+
+            
             InterfaceDao dao = new LivroDaoJpa();
             RequestDispatcher rd;
             Livro l = null;
@@ -64,8 +69,8 @@ public class LivroSrv extends HttpServlet {
                     } catch (Exception ex) {
                         System.out.println(ex.getMessage());
                     }
-                    rd = request.getRequestDispatcher("Listagem.jsp?lista=" + listagem());
-                    rd.forward(request, response);
+                    //rd = request.getRequestDispatcher("Listagem.jsp?lista=" + listagem());
+                    //rd.forward(request, response);
                     break;
                     
                 

@@ -34,12 +34,12 @@ public class Livro {
     private String autor;
 
     @Column(name = "preco")
-    private String preco;
+    private Double preco;
 
     public Livro() {
     }
 
-    public Livro(String titulo, String autor, String preco) {
+    public Livro(String titulo, String autor, Double preco) {
         this.titulo = titulo;
         this.autor = autor;
         this.preco = preco;
@@ -69,11 +69,11 @@ public class Livro {
         this.autor = autor;
     }
 
-    public String getPreco() {
+    public Double getPreco() {
         return preco;
     }
 
-    public void setTelefone(String preco) {
+    public void setTelefone(Double preco) {
         this.preco = preco;
     }
 

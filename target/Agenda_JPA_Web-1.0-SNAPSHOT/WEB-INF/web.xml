@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+
+    <!-- Servlet ClienteSrv -->
     <servlet>
         <servlet-name>ClienteSrv</servlet-name>
         <servlet-class>controller.ClienteSrv</servlet-class>
@@ -8,6 +10,18 @@
         <servlet-name>ClienteSrv</servlet-name>
         <url-pattern>/ClienteSrv</url-pattern>
     </servlet-mapping>
+
+    <!-- Servlet LivroSrv -->
+    <servlet>
+        <servlet-name>LivroSrv</servlet-name>
+        <servlet-class>controller.LivroSrv</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LivroSrv</servlet-name>
+        <url-pattern>/LivroSrv</url-pattern>
+    </servlet-mapping>
+
+    <!-- Configuração de Sessão -->
     <session-config>
         <session-timeout>
             30

@@ -4,6 +4,7 @@
     Author     : lefoly
 --%>
 
+<%@page import="controller.ClienteSrv"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.Cliente"%>
 <!DOCTYPE html>
@@ -20,6 +21,7 @@
     </head>
 
     <%
+        
         String id = request.getParameter("id");
         String nome = request.getParameter("nome");
         String email = request.getParameter("email");
@@ -29,7 +31,10 @@
             email = "";
             telefone = "";
         }
-
+       ClienteSrv clientSrv= new ClienteSrv();
+       String list= clientSrv.listagem();
+        
+        
     %>
 
     <body>
@@ -56,10 +61,10 @@
                 <div class="container">
                     <div class="header">
                         <h1>Clientes</h1>
-
                         <button id="btnCadastrar" onclick="modal.style.display = 'block';">
                             <span> Cadastrar Livro </span>
                         </button>
+
 
                     </div>
                     <div id="modal" class="modal">
@@ -77,16 +82,14 @@
 
                                 <div class="modal-content">
                                     <input type="hidden" name="acao" value="inclusao"
-                                           
-                                    <label for="inpTitulo">Nome</label>
-                                    <input type="text" id="nome" name="nome" />
+
+                                     <label for="inpTitulo">Nome</label>
+                                    <input type="text" id="nome" name="nome" value="<%=nome%>"/>
 
                                     <label for="inpAutor">Email</label>
-                                    <input type="text" id="email" name="email" />
-
+                                    <input type="text" id="email" name="email" value="<%=email%>" />
                                     <label for="inpGenero">Telefone</label>
-                                    <input type="text" id="telefone" name="telefone" />
-                                    
+                                    <input type="text" id="telefone" name="telefone" value="<%=telefone%>" />
                                     <input id="btnSalvar" type="submit" value="salvar"/>
                                 </div>
                             </form>
@@ -102,18 +105,20 @@
                                     <th>Nome</th>
                                     <th>Email</th>
                                     <th>Telefone</th>
+                                    <th class="actions"> Ações</th>
                                 </tr>
                             </thead>
 
-                            <tbody id="bodyLivros"></tbody>
+                            <tbody id="bodyLivros">
+                                <%= list%>
+                            </tbody>
                         </table>
                     </div>
 
                 </div>
             </main>
-        </div>
 
-        >
+        </div>
     </body>
 </html>
 
