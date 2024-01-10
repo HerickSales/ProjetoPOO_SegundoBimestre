@@ -40,15 +40,15 @@ public class LivroSrv extends HttpServlet {
 
         try {
             String acao = request.getParameter("acao");
-            
-
             String id = request.getParameter("id");
             String titulo = request.getParameter("titulo");
             String autor = request.getParameter("autor");
+            Double preco=null;
             String precoString = request.getParameter("preco");
-             Double preco= (Double)parseDouble(precoString);
+            if(precoString!= null){
+                preco= parseDouble(precoString);
+            }
 
-             
 
             
             InterfaceDao dao = new LivroDaoJpa();
@@ -69,15 +69,15 @@ public class LivroSrv extends HttpServlet {
                     } catch (Exception ex) {
                         System.out.println(ex.getMessage());
                     }
-                    //rd = request.getRequestDispatcher("Listagem.jsp?lista=" + listagem());
-                    //rd.forward(request, response);
+                    rd = request.getRequestDispatcher("CadastroLivros.jsp?acao=inclusao&lista=" + listagem());
+                    rd.forward(request, response);
                     break;
                     
                 
 
                 case "pre-edicao":
                     l = (Livro) dao.pesquisarPorId(Integer.parseInt(id));
-                    rd = request.getRequestDispatcher("Formulario.jsp?acao=edicao"
+                    rd = request.getRequestDispatcher("CadastroLivros.jsp?acao=edicao"
                             + "&id=" + l.getId()
                             + "&titulo=" + l.getTitulo()
                             + "&autor=" + l.getAutor()
@@ -86,6 +86,7 @@ public class LivroSrv extends HttpServlet {
                     break;
 
                 case "edicao":
+                    
                     l = new Livro(titulo, autor, preco);
                     l.setId(Integer.parseInt(id));
                     try {
@@ -93,7 +94,7 @@ public class LivroSrv extends HttpServlet {
                     } catch (Exception ex) {
                         System.out.println(ex.getMessage());
                     }
-                    rd = request.getRequestDispatcher("Listagem.jsp?lista=" + listagem());
+                    rd = request.getRequestDispatcher("CadastroLivros.jsp?acao=inclusao&lista=" + listagem());
                     rd.forward(request, response);
                     break;
 
@@ -105,17 +106,17 @@ public class LivroSrv extends HttpServlet {
                 } catch (Exception ex) {
                     System.out.println(ex.getMessage());
                 }
-                rd = request.getRequestDispatcher("Listagem.jsp?lista=" + listagem());
+                rd = request.getRequestDispatcher("CadastroLivros.jsp?acao=inclusao&lista=" + listagem());
                 rd.forward(request, response);
                 break;
 
                 case "listagem":
-                    rd = request.getRequestDispatcher("Listagem.jsp?lista=" + listagem());
+                    rd = request.getRequestDispatcher("CadastroLivros.jsp?acao=inclusao&lista=" + listagem());
                     rd.forward(request, response);
                     break;
 
                 case "pesquisarPorTitulo":
-                    rd = request.getRequestDispatcher("Listagem.jsp?lista=" + listagemFiltrada(titulo));
+                    rd = request.getRequestDispatcher("CadastroLivros.jsp?acao=inclusao&lista=" + listagemFiltrada(titulo));
                     rd.forward(request, response);
                     break;
             }
@@ -124,7 +125,7 @@ public class LivroSrv extends HttpServlet {
         }
     }
 
-    private String listagem() {
+    public String listagem() {
         InterfaceDao dao = new LivroDaoJpa();
         List<Livro> lista = null;
         try {
@@ -139,13 +140,14 @@ public class LivroSrv extends HttpServlet {
                     + "<td>" + livro.getTitulo() + "</td>"
                     + "<td>" + livro.getAutor() + "</td>"
                     + "<td>" + livro.getPreco() + "</td>"
-                    + "<td><form action=livro?acao=pre-edicao method='POST'>"
+                    + "<td><form action=LivroSrv?acao=pre-edicao method='POST'>"
                     + "<input type='hidden' name='id' value="
-                    + livro.getId() + "><input type='submit' value=editar>"
+                    + livro.getId() + "><input type='submit'class='btnBody' value=editar>"
+                     + "<i class=\"material-icons\">assignment</i></form></td>"
                     + "</form></td>"
-                    + "<form action=livroSrv?acao=exclusao method='POST'>"
+                    + "<form action=LivroSrv?acao=exclusao method='POST'>"
                     + "<td><input type='hidden' name='id' value="
-                    + livro.getId() + "><input type='submit' value=excluir></td>"
+                    + livro.getId() + "><input type='submit'class='btnBody' value=deletar><i class='material-icons'>delete</i></td>"
                     + "</form>"
                     + "</tr>";
         }

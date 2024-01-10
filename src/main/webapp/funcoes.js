@@ -23,6 +23,18 @@ function limpaCamposCliente() {
     telefone.value = "";
     modal.style.display = "none";
     
+}
+
+function limpaCamposLivros(modal) {
+   
+    let titulo = document.querySelector("#titulo");
+    let autor = document.querySelector("#autor");
+    let preco = document.querySelector("#preco");
+    titulo.value = "";
+    autor.value = "";
+    preco.value = 0;
+    modal.style.display = "none";
+    
 };
 
 

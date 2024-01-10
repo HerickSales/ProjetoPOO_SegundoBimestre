@@ -34,7 +34,8 @@
         }
         ClienteSrv clientSrv = new ClienteSrv();
         String list = clientSrv.listagem();
-        System.out.println(id+ nome);
+        
+        
 
 
 
@@ -74,7 +75,7 @@
                         <div class="modal-container">
                             <div class="modal-header-style">
                                 <div class="modal-header">
-                                    <h1>Cadastro de Livros</h1>
+                                    <h1>Cadastro de Clientes</h1>
                                     <button class="modal-close" id="btnModalClose" onclick= "limpaCamposCliente()">
                                         <i class="material-icons">close</i>
                                     </button>
@@ -84,11 +85,10 @@
                             <form action="ClienteSrv" method="POST">
 
                                 <div class="modal-content">
-                                    <input type="hidden" name="acao" value="inclusao"
-
-                                           <label for="inpTitulo">Nome</label>
+                                    <input type="hidden" name="acao" value=<%=acao%>>
+                                    <input type="hidden" name="id" value=<%=id%>>
+                                    <label for="inpTitulo">Nome</label>
                                     <input type="text" id="nome" name="nome" value="<%=nome%>"/>
-
                                     <label for="inpAutor">Email</label>
                                     <input type="text" id="email" name="email" value="<%=email%>" />
                                     <label for="inpGenero">Telefone</label>
@@ -96,6 +96,7 @@
                                     <input id="btnSalvar" type="submit" value="salvar"/>
                                 </div>
                             </form>
+                                    
                         </div>
                     </div>
 

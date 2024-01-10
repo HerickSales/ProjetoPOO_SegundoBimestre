@@ -40,6 +40,7 @@ public class ClienteSrv extends HttpServlet {
 
         try {
             String acao = request.getParameter("acao");
+            System.out.println(acao);
             String id = request.getParameter("id");
             String nome = request.getParameter("nome");
             String email = request.getParameter("email");
@@ -68,7 +69,7 @@ public class ClienteSrv extends HttpServlet {
                     } catch (Exception ex) {
                         System.out.println(ex.getMessage());
                     }
-                    rd = request.getRequestDispatcher("CadastroClientes.jsp?lista=" + listagem());
+                    rd = request.getRequestDispatcher("CadastroClientes.jsp?acao=inclusao&lista=" + listagem());
                     rd.forward(request, response);
                     break;
                     
@@ -85,6 +86,7 @@ public class ClienteSrv extends HttpServlet {
                     break;
 
                 case "edicao":
+                    System.out.println(nome+email+telefone+id);
                     c = new Cliente(nome, email, telefone);
                     c.setId(Integer.parseInt(id));
                     try {
@@ -92,7 +94,7 @@ public class ClienteSrv extends HttpServlet {
                     } catch (Exception ex) {
                         System.out.println(ex.getMessage());
                     }
-                    rd = request.getRequestDispatcher("Listagem.jsp?lista=" + listagem());
+                    rd = request.getRequestDispatcher("CadastroClientes.jsp?acao=inclusao&lista=" + listagem());
                     rd.forward(request, response);
                     break;
 

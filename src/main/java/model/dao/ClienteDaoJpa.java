@@ -5,6 +5,7 @@
  */
 package model.dao;
 
+
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -97,6 +98,13 @@ public class ClienteDaoJpa implements InterfaceDao<Cliente> {
 
     @Override
     public List<Cliente> filtrarPorTitulo(String titulo) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+
+
+    @Override
+    public List<Cliente> filtrarPorNomeOuTitulo(int id) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
