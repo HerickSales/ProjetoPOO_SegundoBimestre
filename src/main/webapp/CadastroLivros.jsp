@@ -4,6 +4,9 @@
     Author     : lefoly
 --%>
 
+<%@page import="controller.LivroSrv"%>
+<%@page import="model.Livro"%>
+<%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.Cliente"%>
 <!DOCTYPE html>
@@ -11,7 +14,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>CadastroLivros</title>
-                <link rel="stylesheet" href=""/>
+        <link rel="stylesheet" href=""/>
         <link
             href="https://fonts.googleapis.com/icon?family=Material+Icons"
             rel="stylesheet"
@@ -20,10 +23,22 @@
     </head>
 
     <%
-            String id= request.getParameter("id");
-            String titulo=request.getParameter("titulo");
-            String autor=request.getParameter("autor");
-            String preco= request.getParameter("preco");
+        String id = request.getParameter("id");
+        String acao = request.getParameter("acao");
+        String titulo = request.getParameter("titulo");
+        String autor = request.getParameter("autor");
+        String preco = request.getParameter("preco");
+
+        LivroSrv srv = new LivroSrv();
+        String list = srv.listagem();
+        
+        if(id==null|| titulo==null){
+        titulo="";
+        autor="";
+        preco="";
+        }
+
+
     %>
 
     <body>
@@ -50,38 +65,42 @@
                     <div class="header">
                         <h1>Livros</h1>
 
-                            <button id="btnCadastrar" onclick="modal.style.display='block';">
-                                <span> Cadastrar Livro </span>
-                            </button>
+                        <button id="btnCadastrar" onclick="showModal()">
+                            <span> Cadastrar Livro </span>
+                        </button>
                     </div>
                     <div id="modal" class="modal">
                         <div class="modal-container">
                             <div class="modal-header-style">
                                 <div class="modal-header">
                                     <h1>Cadastro de Livros</h1>
-                                    <button class="modal-close" id="btnModalClose" onclick="modal.style.display='none'">
+                                    <button class="modal-close" id="btnModalClose" onclick="limpaCamposLivros(modal)">
                                         <i class="material-icons">close</i>
                                     </button>
                                 </div>
                                 <p>Preencha os campos abaixo:</p>
                             </div>
+                            <form action="LivroSrv" method="POST">
+                                <div class="modal-content">
 
-                            <div class="modal-content">
-                                <label for="inpTitulo">Título</label>
-                                <input type="text" id="inpTitulo" />
+                                    <input type="hidden" name="acao" value=<%=acao%>> 
+                                    <input type="hidden" name="id" value=<%=id%>>
 
-                                <label for="inpAutor">Autor</label>
-                                <input type="text" id="inpAutor" />
+                                    <label for="inpTitulo">Título</label>
+                                    <input type="text"  name="titulo" id="titulo" value=<%=titulo%> >
+
+                                    <label for="inpAutor">Autor</label>
+                                    <input type="text"  name="autor" id="autor" value=<%=autor%> >
 
 
-                                <label for="inpValor">Preco</label>
-                                <input type="number" id="inpValor" />
+                                    <label for="inpValor">Preco</label>
+                                    <input type="number"  name="preco" id="preco" value=<%=preco%> >
 
-                                <button id="btnSalvar">
-                                    <span><i class="material-icons">save</i></span>
-                                    <span>Salvar Registro</span>
-                                </button>
-                            </div>
+                                    <input type="submit" value="Salvar" id="btnSalvar">
+                                </div>
+                            </form>
+
+
                         </div>
                     </div>
 
@@ -97,13 +116,22 @@
                                 </tr>
                             </thead>
 
-                            <tbody id="bodyLivros"></tbody>
+                            <tbody id="bodyLivros">
+                                <%=list%>
+                            </tbody>
                         </table>
                     </div>
-                    
                 </div>
             </main>
+                                                <script>
+                                 let acao = "<%=acao%>";
+                                 if (acao === "edicao") {
+                                     modal.style.display = 'block';
+                                 }
+
+                    </script>
         </div>
+        <script src="./funcoes.js"></script>
     </body>
 </html>
 

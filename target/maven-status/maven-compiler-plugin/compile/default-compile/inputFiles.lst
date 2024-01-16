@@ -1,9 +1,12 @@
 C:\Users\heric\OneDrive\Área de Trabalho\IFF\4periodo\POO\ProjetoPOO_SegundoBimestre\src\main\java\model\Cliente.java
+C:\Users\heric\OneDrive\Área de Trabalho\IFF\4periodo\POO\ProjetoPOO_SegundoBimestre\src\main\java\model\Emprestimo.java
 C:\Users\heric\OneDrive\Área de Trabalho\IFF\4periodo\POO\ProjetoPOO_SegundoBimestre\src\main\java\controller\LivroSrv.java
 C:\Users\heric\OneDrive\Área de Trabalho\IFF\4periodo\POO\ProjetoPOO_SegundoBimestre\src\main\java\model\dao\ConnFactory.java
 C:\Users\heric\OneDrive\Área de Trabalho\IFF\4periodo\POO\ProjetoPOO_SegundoBimestre\src\main\java\model\dao\DaoFactory.java
+C:\Users\heric\OneDrive\Área de Trabalho\IFF\4periodo\POO\ProjetoPOO_SegundoBimestre\src\main\java\model\dao\EmprestimoDaoJpa.java
 C:\Users\heric\OneDrive\Área de Trabalho\IFF\4periodo\POO\ProjetoPOO_SegundoBimestre\src\main\java\model\dao\LivroDaoJpa.java
 C:\Users\heric\OneDrive\Área de Trabalho\IFF\4periodo\POO\ProjetoPOO_SegundoBimestre\src\main\java\model\dao\ClienteDaoJpa.java
 C:\Users\heric\OneDrive\Área de Trabalho\IFF\4periodo\POO\ProjetoPOO_SegundoBimestre\src\main\java\model\Livro.java
 C:\Users\heric\OneDrive\Área de Trabalho\IFF\4periodo\POO\ProjetoPOO_SegundoBimestre\src\main\java\controller\ClienteSrv.java
 C:\Users\heric\OneDrive\Área de Trabalho\IFF\4periodo\POO\ProjetoPOO_SegundoBimestre\src\main\java\model\dao\InterfaceDao.java
+C:\Users\heric\OneDrive\Área de Trabalho\IFF\4periodo\POO\ProjetoPOO_SegundoBimestre\src\main\java\controller\EmprestimoSrv.java

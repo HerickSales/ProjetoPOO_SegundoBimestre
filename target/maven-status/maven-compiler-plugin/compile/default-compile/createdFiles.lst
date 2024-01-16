@@ -1,8 +1,11 @@
-controller\ClienteSrv.class
-model\dao\DaoFactory.class
+model\Emprestimo.class
+model\dao\EmprestimoDaoJpa.class
 model\dao\ClienteDaoJpa.class
-model\Cliente.class
 model\dao\LivroDaoJpa.class
 model\dao\ConnFactory.class
+controller\EmprestimoSrv.class
+controller\ClienteSrv.class
+model\dao\DaoFactory.class
+model\Cliente.class
 model\dao\InterfaceDao.class
 model\Livro.class

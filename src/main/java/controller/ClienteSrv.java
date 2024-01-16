@@ -40,14 +40,13 @@ public class ClienteSrv extends HttpServlet {
 
         try {
             String acao = request.getParameter("acao");
+            System.out.println(acao);
             String id = request.getParameter("id");
             String nome = request.getParameter("nome");
             String email = request.getParameter("email");
             String telefone = request.getParameter("telefone");
             
-            System.out.println("*****************************");
-            System.out.println(acao+ nome+id+email+telefone);
-            System.out.println("*****************************");
+            
           
             InterfaceDao dao = new ClienteDaoJpa();
             RequestDispatcher rd;
@@ -70,15 +69,15 @@ public class ClienteSrv extends HttpServlet {
                     } catch (Exception ex) {
                         System.out.println(ex.getMessage());
                     }
-                    //rd = request.getRequestDispatcher("Listagem.jsp?lista=" + listagem());
-                    //rd.forward(request, response);
+                    rd = request.getRequestDispatcher("CadastroClientes.jsp?acao=inclusao&lista=" + listagem());
+                    rd.forward(request, response);
                     break;
                     
                 
 
                 case "pre-edicao":
                     c = (Cliente) dao.pesquisarPorId(Integer.parseInt(id));
-                    rd = request.getRequestDispatcher("Formulario.jsp?acao=edicao"
+                    rd = request.getRequestDispatcher("CadastroClientes.jsp?acao=edicao"
                             + "&id=" + c.getId()
                             + "&nome=" + c.getNome()
                             + "&email=" + c.getEmail()
@@ -87,6 +86,7 @@ public class ClienteSrv extends HttpServlet {
                     break;
 
                 case "edicao":
+                    System.out.println(nome+email+telefone+id);
                     c = new Cliente(nome, email, telefone);
                     c.setId(Integer.parseInt(id));
                     try {
@@ -94,7 +94,7 @@ public class ClienteSrv extends HttpServlet {
                     } catch (Exception ex) {
                         System.out.println(ex.getMessage());
                     }
-                    rd = request.getRequestDispatcher("Listagem.jsp?lista=" + listagem());
+                    rd = request.getRequestDispatcher("CadastroClientes.jsp?acao=inclusao&lista=" + listagem());
                     rd.forward(request, response);
                     break;
 
@@ -102,16 +102,17 @@ public class ClienteSrv extends HttpServlet {
                     try {
                     c = new Cliente();
                     c.setId(Integer.parseInt(id));
+                        System.out.println(id);
                     dao.excluir(c);
                 } catch (Exception ex) {
                     System.out.println(ex.getMessage());
                 }
-                rd = request.getRequestDispatcher("Listagem.jsp?lista=" + listagem());
+                rd = request.getRequestDispatcher("CadastroClientes.jsp?acao=inclusao");
                 rd.forward(request, response);
                 break;
 
                 case "listagem":
-                    rd = request.getRequestDispatcher("Listagem.jsp?lista=" + listagem());
+                    rd = request.getRequestDispatcher("CadastroClientes.jsp?lista=" + listagem());
                     rd.forward(request, response);
                     break;
 
@@ -125,13 +126,13 @@ public class ClienteSrv extends HttpServlet {
         }
     }
 
-    private String listagem() {
+    public String listagem() {
         InterfaceDao dao = new ClienteDaoJpa();
         List<Cliente> lista = null;
         try {
             lista = dao.listar();
         } catch (Exception ex) {
-            System.out.println(ex.getMessage());
+            System.out.println("mensagem de erro:"+ ex.getMessage());
         }
         String listaHTML = "";
         for (Cliente cliente : lista) {
@@ -140,16 +141,17 @@ public class ClienteSrv extends HttpServlet {
                     + "<td>" + cliente.getNome() + "</td>"
                     + "<td>" + cliente.getEmail() + "</td>"
                     + "<td>" + cliente.getTelefone() + "</td>"
-                    + "<td><form action=cliente?acao=pre-edicao method='POST'>"
+                    + "<td><form action=ClienteSrv?acao=pre-edicao  method='POST'>"
                     + "<input type='hidden' name='id' value="
-                    + cliente.getId() + "><input type='submit' value=editar>"
-                    + "</form></td>"
-                    + "<form action=clienteSrv?acao=exclusao method='POST'>"
+                    + cliente.getId() + "><input type='submit' class='btnBody'    value=editar>"
+                    + "<i class=\"material-icons\">assignment</i></form></td>"
+                    + "<form action=ClienteSrv?acao=exclusao method='POST'>"
                     + "<td><input type='hidden' name='id' value="
-                    + cliente.getId() + "><input type='submit' value=excluir></td>"
+                    + cliente.getId() + "><input type='submit' class='btnBody' value='deletar'><i class='material-icons'>delete</i></td>"
                     + "</form>"
                     + "</tr>";
         }
+        
         return listaHTML;
     }
 
@@ -168,16 +170,17 @@ public class ClienteSrv extends HttpServlet {
                     + "<td>" + cliente.getNome() + "</td>"
                     + "<td>" + cliente.getEmail() + "</td>"
                     + "<td>" + cliente.getTelefone() + "</td>"
-                    + "<td><form action=cliente?acao=pre-edicao method='POST'>"
+                    + "<td><form action=cliente?acao=pre-edicao  method='POST'>"
                     + "<input type='hidden' name='id' value="
-                    + cliente.getId() + "><input type='submit' value=editar>"
+                    + cliente.getId() + "><input type='submit'  value=editar>"
                     + "</form></td>"
                     + "<form action=clienteSrv?acao=exclusao method='POST'>"
                     + "<td><input type='hidden' name='id' value="
-                    + cliente.getId() + "><input type='submit' value=excluir></td>"
+                    + cliente.getId() + "><input type='submit'  value=excluir></td>"
                     + "</form>"
                     + "</tr>";
         }
+        System.out.println("ListaHtml: " + listaHTML);
         return listaHTML;
     }
 

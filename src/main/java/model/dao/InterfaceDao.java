@@ -5,6 +5,7 @@
  */
 package model.dao;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -26,4 +27,8 @@ public interface InterfaceDao<T> {
     public abstract List<T> filtrarPorNome(String nome) throws Exception;
     
     public abstract List<T> filtrarPorTitulo(String titulo) throws Exception;
+    
+    public abstract List<T> filtrarPorNomeOuTitulo(int id) throws Exception;
+    
+
 }
