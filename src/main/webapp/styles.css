@@ -3,7 +3,6 @@ ul {
   margin: 0;
   padding: 0;
 }
-
 main {
   padding: 2rem 4rem 2rem 4rem;
   width: 100vw;
@@ -75,6 +74,10 @@ a:hover + .tooltip {
   border-radius: 0.5rem;
 }
 
+input button{
+    cursor:pointer
+}
+
 .container {
   max-width: 100%;
   min-height: 100%;
@@ -95,7 +98,8 @@ h1 {
   font-family: Arial, Helvetica, sans-serif;
   color: #060f1d;
 }
-
+.btnCliente,
+.btnLivro,
 #btnCadastrar,
 #btnSalvar {
   display: flex;
@@ -111,21 +115,28 @@ h1 {
   padding: 1.2rem;
   align-items: center;
 }
-
+.btnCliente,
+.btnLivro,
 #btnCadastrar span,
 #btnSalvar span {
   vertical-align: middle;
   font-size: 0.9rem;
 }
-
+.btnCliente:hover,
+.btnLivro:hover,
 #btnCadastrar:hover,
 #btnSalvar:hover {
   background-color: #ffdc8c;
   cursor: pointer;
 }
+#btnSalvar:disabled{
+    background-color: #808080;
+    cursor:default;
+}
 
 .table-content {
-  height: 36rem;
+  height: 32rem;
+
   overflow-y: auto;
 }
 
@@ -140,6 +151,7 @@ h1 {
   color: #fff;
   font-family: Arial, Helvetica, sans-serif;
   position: sticky;
+  width:100%;
   top: 0;
   z-index: 1;
 }
@@ -208,6 +220,7 @@ tbody tr:nth-child(odd) {
   height: 100%;
   background-color: rgba(32, 32, 32, 0.8);
   z-index: 2;
+  
 }
 
 .modal-container {
@@ -215,6 +228,7 @@ tbody tr:nth-child(odd) {
   margin: 5% 30% 5% 30%;
   border-radius: 1rem;
   height: 42rem;
+  overflow: auto;
 }
 
 .modal-header-style {
@@ -250,6 +264,7 @@ tbody tr:nth-child(odd) {
   margin: 0rem 0rem 0rem 1rem;
   font-family: Arial, Helvetica, sans-serif;
   color: #bbbbbb;
+  
 }
 
 .modal-content {
@@ -274,6 +289,25 @@ tbody tr:nth-child(odd) {
 }
 
 .modal-content button {
-  margin-top: 2rem;
+ 
   align-self: center;
+  background-color: #ffffff; 
+  cursor:pointer;
+  border:0px;
 }
+.modal-content button:hover{
+    background-color: #cecece;
+    
+}
+
+.modal-enter{
+    display: flex;
+    flex-direction: row;
+
+}
+
+
+
+
+
+

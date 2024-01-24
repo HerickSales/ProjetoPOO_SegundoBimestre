@@ -154,7 +154,7 @@ public class LivroSrv extends HttpServlet {
         return listaHTML;
     }
 
-    private String listagemFiltrada(String titulo) {
+    public String listagemFiltrada(String titulo) {
         InterfaceDao dao = new LivroDaoJpa();
         List<Livro> lista = null;
         try {
@@ -181,6 +181,27 @@ public class LivroSrv extends HttpServlet {
         }
         return listaHTML;
     }
+    public String listagemParcial() {
+        InterfaceDao dao = new LivroDaoJpa();
+        List<Livro> lista = null;
+        try {
+            lista = dao.listar();
+        } catch (Exception ex) {
+            System.out.println("mensagem de erro:"+ ex.getMessage());
+        }
+        String listaHTML = "";
+        for (Livro livro : lista) {
+            listaHTML = listaHTML
+                    + "<tr>"
+                    + "<td>" + livro.getTitulo() + "</td>"
+                    + "<td>" + livro.getAutor() +
+                    " </td> <td><button style='background-color: #ffd167' type='button' value='"+livro.getId()+"' class='btnLivro' >Selecionar </button></td>"
+                    + "</tr>";
+        }
+            
+        return listaHTML;
+    }
+
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
