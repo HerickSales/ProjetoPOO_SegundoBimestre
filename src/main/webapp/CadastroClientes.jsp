@@ -44,7 +44,7 @@
     <body>
         <div class="content">
             <nav class="navbar">
-                <a href="index.html" class="logo" href="#">
+                <a href="index.jsp" class="logo">
                     <i class="material-icons">dataset</i>
                 </a>
                 <div>
@@ -65,10 +65,10 @@
                 <div class="container">
                     <div class="header">
                         <h1>Clientes</h1>
-                        <button id="btnCadastrar" onclick="showModal()">
+                        <button id="btnCadastrar" onclick="showModal(modal)">
                             <span> Cadastrar Livro </span>
                         </button>
-
+    
 
                     </div>
                     <div id="modal" class="modal">
@@ -76,7 +76,7 @@
                             <div class="modal-header-style">
                                 <div class="modal-header">
                                     <h1>Cadastro de Clientes</h1>
-                                    <button class="modal-close" id="btnModalClose" onclick= "limpaCamposCliente()">
+                                    <button class="modal-close" id="btnModalClose" onclick= "limpaCamposCliente(modal)">
                                         <i class="material-icons">close</i>
                                     </button>
                                 </div>
@@ -87,12 +87,15 @@
                                 <div class="modal-content">
                                     <input type="hidden" name="acao" value=<%=acao%>>
                                     <input type="hidden" name="id" value=<%=id%>>
+                                    
                                     <label for="inpTitulo">Nome</label>
-                                    <input type="text" id="nome" name="nome" value="<%=nome%>"/>
+                                    <input type="text" oninput="verificaCampos(nome.value,email.value,telefone.value)"  id="nome" name="nome" value="<%=nome%>"/>
+                                    
                                     <label for="inpAutor">Email</label>
-                                    <input type="text" id="email" name="email" value="<%=email%>" />
+                                    <input type="text" oninput="verificaCampos(nome.value,email.value,telefone.value)" id="email" name="email" value="<%=email%>" />
+                                    
                                     <label for="inpGenero">Telefone</label>
-                                    <input type="text" id="telefone" name="telefone" value="<%=telefone%>" />
+                                    <input type="text" oninput="verificaCampos(nome.value,email.value,telefone.value)" id="telefone" name="telefone" value="<%=telefone%>" />
                                     <input id="btnSalvar" type="submit" value="salvar"/>
                                 </div>
                             </form>
@@ -125,8 +128,9 @@
  <script>
     let acao= "<%=acao%>";
     if(acao==="edicao"){
-        modal.style.display='block';
-    }
+       modal.style.display='block';
+   }
+
     
     
     

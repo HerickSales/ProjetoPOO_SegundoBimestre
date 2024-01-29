@@ -44,7 +44,7 @@
     <body>
         <div class="content">
             <nav class="navbar">
-                <a href="index.html" class="logo" href="#">
+                <a href="index.jsp" class="logo">
                     <i class="material-icons">dataset</i>
                 </a>
                 <div>
@@ -65,7 +65,7 @@
                     <div class="header">
                         <h1>Livros</h1>
 
-                        <button id="btnCadastrar" onclick="showModal()">
+                        <button id="btnCadastrar" onclick="showModal(modal)">
                             <span> Cadastrar Livro </span>
                         </button>
                     </div>
@@ -87,32 +87,31 @@
                                     <input type="hidden" name="id" value=<%=id%>>
 
                                     <label for="inpTitulo">Título</label>
-                                    <input type="text"  name="titulo" id="titulo" value=<%=titulo%> >
+                                    <input type="text" oninput="verificaCampos(titulo.value,autor.value,preco.value)"  name="titulo" id="titulo" value=<%=titulo%> >
 
                                     <label for="inpAutor">Autor</label>
-                                    <input type="text"  name="autor" id="autor" value=<%=autor%> >
+                                    <input type="text" oninput="verificaCampos(titulo.value,autor.value,preco.value)"   name="autor" id="autor" value=<%=autor%> >
 
 
                                     <label for="inpValor">Preco</label>
-                                    <input type="number"  name="preco" id="preco" value=<%=preco%> >
+                                    <input type="number" oninput="verificaCampos(titulo.value,autor.value,preco.value)"   name="preco" id="preco" value=<%=preco%> >
 
                                     <input type="submit" value="Salvar" id="btnSalvar">
                                 </div>
                             </form>
-
-
                         </div>
                     </div>
-
-                    <hr />
-
-                    <div class="table-content">
+                                    <hr/>             
+                   
+                    
+                    <div class="table-content">                        
                         <table>
                             <thead>
                                 <tr>
                                     <th>Título</th>
                                     <th>Autor(es)</th>
                                     <th>Preço</th>
+                                    <<th>Ações</th>
                                 </tr>
                             </thead>
 

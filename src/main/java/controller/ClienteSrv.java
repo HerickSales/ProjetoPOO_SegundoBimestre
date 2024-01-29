@@ -45,7 +45,7 @@ public class ClienteSrv extends HttpServlet {
             String nome = request.getParameter("nome");
             String email = request.getParameter("email");
             String telefone = request.getParameter("telefone");
-            
+           
             
           
             InterfaceDao dao = new ClienteDaoJpa();
@@ -155,7 +155,7 @@ public class ClienteSrv extends HttpServlet {
         return listaHTML;
     }
 
-    private String listagemFiltrada(String nome) {
+    public String listagemFiltrada(String nome) {
         InterfaceDao dao = new ClienteDaoJpa();
         List<Cliente> lista = null;
         try {
@@ -172,17 +172,34 @@ public class ClienteSrv extends HttpServlet {
                     + "<td>" + cliente.getTelefone() + "</td>"
                     + "<td><form action=cliente?acao=pre-edicao  method='POST'>"
                     + "<input type='hidden' name='id' value="
-                    + cliente.getId() + "><input type='submit'  value=editar>"
+                    + cliente.getId() + "><input type='submit'  value=Selecionar>"
                     + "</form></td>"
-                    + "<form action=clienteSrv?acao=exclusao method='POST'>"
-                    + "<td><input type='hidden' name='id' value="
-                    + cliente.getId() + "><input type='submit'  value=excluir></td>"
-                    + "</form>"
                     + "</tr>";
         }
         System.out.println("ListaHtml: " + listaHTML);
         return listaHTML;
     }
+    public String listagemParcial() {
+        InterfaceDao dao = new ClienteDaoJpa();
+        List<Cliente> lista = null;
+        try {
+            lista = dao.listar();
+        } catch (Exception ex) {
+            System.out.println("mensagem de erro:"+ ex.getMessage());
+        }
+        String listaHTML = "";
+        for (Cliente cliente : lista) {
+            listaHTML = listaHTML
+                    + "<tr>"
+                    + "<td>" + cliente.getNome() + "</td>"
+                    + "<td>" + cliente.getEmail() +
+                    " </td> <td><button style='background-color: #ffd167' type='button' value='"+cliente.getId()+"' class='btnCliente'>Selecionar </button></td>"
+                    + "</tr>";
+        }
+            
+        return listaHTML;
+    }
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

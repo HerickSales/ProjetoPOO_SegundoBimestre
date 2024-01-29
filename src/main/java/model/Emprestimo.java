@@ -29,19 +29,19 @@ public class Emprestimo {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
     
-    @Column(name = "cliente")
+    @Column(name = "ID_CLIENTE")
     private int clienteId;
 
-    @Column(name = "livro")
+    @Column(name = "ID_LIVRO")
     private int livroId;
 
-    @Column(name = "data")
-    private Date dataDev;
+    @Column(name = "DT_DEV")
+    private String dataDev;
 
     public Emprestimo() {
     }
 
-    public Emprestimo(int clienteId, int livroId, Date dataDev) {
+    public Emprestimo(int clienteId, int livroId, String dataDev) {
         this.clienteId = clienteId;
         this.livroId = livroId;
         this.dataDev = dataDev;
@@ -71,17 +71,17 @@ public class Emprestimo {
         this.livroId = livroId;
     }
 
-    public Date getDataDev() {
+    public String getDataDev() {
         return dataDev;
     }
 
-    public void setDataDev(Date dataDev) {
+    public void setDataDev(String dataDev) {
         this.dataDev = dataDev;
     }
 
     @Override
     public String toString() {
-        return "Emprestimo:" + "id=" + id + ", clienteId=" + clienteId + ", licroId=" + livroId + ", dataDev=" + dataDev.toString() + '}';
+        return "Emprestimo:" + "id=" + id + ", clienteId=" + clienteId + ", licroId=" + livroId + ", dataDev=" + dataDev + '}';
     }
 
 }

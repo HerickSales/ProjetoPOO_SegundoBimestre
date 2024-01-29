@@ -23,7 +23,6 @@ import model.dao.EmprestimoDaoJpa;
 import model.dao.InterfaceDao;
 import model.dao.LivroDaoJpa;
 
-
 /**
  *
  * @author heric
@@ -45,63 +44,55 @@ public class EmprestimoSrv extends HttpServlet {
         try {
             String acao = request.getParameter("acao");
             String id = request.getParameter("id");
-            
-            String livro = request.getParameter("livro");
-            String cliente=request.getParameter("cliente");
-            String DT=request.getParameter("data");
-            
-            
-            int clienteId=0;
-            int livroId=0;
-                    
-                    
-        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yy");
-        Date dataDev = dateFormat.parse(DT);
-        
-                    
-   
+            int livroId = 0;
+            int clienteId = 0;
 
+            String clienteIdString = request.getParameter("clienteId");
+            String livroIdString = request.getParameter("livroId");
+            String dataDev = request.getParameter("data");
+            ClienteDaoJpa clienteJpa= new ClienteDaoJpa();
+            LivroDaoJpa livroJpa= new LivroDaoJpa();
 
-            
+            System.out.println(acao);
+
+            if (clienteIdString != null) {
+                clienteId = Integer.parseInt(clienteIdString);
+            }
+
+            if (livroIdString != null) {
+                livroId = Integer.parseInt(livroIdString);
+
+            }
+
             InterfaceDao dao = new EmprestimoDaoJpa();
             RequestDispatcher rd;
             Emprestimo e = null;
 
-            
-            
-            
-
-            
-     
-
-
-
             switch (acao) {
                 case "inclusao":
                     e = new Emprestimo(clienteId, livroId, dataDev);
+
                     try {
                         dao.incluir(e);
                     } catch (Exception ex) {
                         System.out.println(ex.getMessage());
                     }
-                    rd = request.getRequestDispatcher("CadastroLivros.jsp?acao=inclusao&lista=" + listagem());
+                    rd = request.getRequestDispatcher("index.jsp?acao=inclusao&lista=" + listagem());
                     rd.forward(request, response);
                     break;
-                    
-                
 
                 case "pre-edicao":
                     e = (Emprestimo) dao.pesquisarPorId(Integer.parseInt(id));
-                    rd = request.getRequestDispatcher("CadastroLivros.jsp?acao=edicao"
+                    rd = request.getRequestDispatcher("index.jsp?acao=edicao"
                             + "&id=" + e.getId()
-                            + "&titulo=" + e.getClienteId()
-                            + "&autor=" + e.getLivroId()
-                            + "&preco=" + e.getDataDev().toString());
+                            + "&cliente=" + clienteJpa.pesquisarPorId(e.getClienteId()).getNome()
+                            + "&livro=" + livroJpa.pesquisarPorId(e.getLivroId()).getTitulo()
+                            + "&dataDev=" + e.getDataDev());
                     rd.forward(request, response);
                     break;
 
                 case "edicao":
-                    
+
                     e = new Emprestimo(clienteId, livroId, dataDev);
                     e.setId(Integer.parseInt(id));
                     try {
@@ -109,37 +100,38 @@ public class EmprestimoSrv extends HttpServlet {
                     } catch (Exception ex) {
                         System.out.println(ex.getMessage());
                     }
-                    rd = request.getRequestDispatcher("CadastroLivros.jsp?acao=inclusao&lista=" + listagem());
+                    rd = request.getRequestDispatcher("index.jsp?acao=inclusao&lista=" + listagem());
                     rd.forward(request, response);
                     break;
 
                 case "exclusao":
                     try {
-                    e = new Emprestimo();
-                    e.setId(Integer.parseInt(id));
-                    dao.excluir(e);
-                } catch (Exception ex) {
-                    System.out.println(ex.getMessage());
-                }
-                rd = request.getRequestDispatcher("CadastroLivros.jsp?acao=inclusao&lista=" + listagem());
-                rd.forward(request, response);
-                break;
+                        e = new Emprestimo();
+                        e.setId(Integer.parseInt(id));
+                        dao.excluir(e);
+                    } catch (Exception ex) {
+                        System.out.println(ex.getMessage());
+                    }
+                    rd = request.getRequestDispatcher("index.jsp?acao=inclusao&lista=" + listagem());
+                    rd.forward(request, response);
+                    break;
 
                 case "listagem":
-                    rd = request.getRequestDispatcher("CadastroLivros.jsp?acao=inclusao&lista=" + listagem());
+                    rd = request.getRequestDispatcher("index.jsp?acao=inclusao&lista=" + listagem());
                     rd.forward(request, response);
                     break;
 
                 case "pesquisarPorId":
-                    int idInt=(Integer) parseInt(id);
-                    rd = request.getRequestDispatcher("CadastroLivros.jsp?acao=inclusao&lista=" + listagemFiltrada(idInt));
+                    int idInt = (Integer) parseInt(id);
+                    rd = request.getRequestDispatcher("index.jsp?acao=inclusao&lista=" + listagemFiltrada(idInt));
                     rd.forward(request, response);
                     break;
             }
         } catch (Exception ex) {
-            Logger.getLogger(LivroSrv.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(EmprestimoSrv.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     public String listagem() throws Exception {
         InterfaceDao dao = new EmprestimoDaoJpa();
         List<Emprestimo> lista = null;
@@ -149,23 +141,24 @@ public class EmprestimoSrv extends HttpServlet {
             System.out.println(ex.getMessage());
         }
         String listaHTML = "";
-        ClienteDaoJpa daoCliente= new ClienteDaoJpa();
-        LivroDaoJpa daoLivro= new LivroDaoJpa();
+        ClienteDaoJpa daoCliente = new ClienteDaoJpa();
+        LivroDaoJpa daoLivro = new LivroDaoJpa();
+
         
         for (Emprestimo emprestimo : lista) {
-            String nomeCliente= daoCliente.pesquisarPorId(emprestimo.getClienteId()).getNome();
-            String tituloLivro= daoLivro.pesquisarPorId(emprestimo.getLivroId()).getTitulo();
+            String nomeCliente = daoCliente.pesquisarPorId(emprestimo.getClienteId()).getNome();
+            String tituloLivro = daoLivro.pesquisarPorId(emprestimo.getLivroId()).getTitulo();
             listaHTML = listaHTML
                     + "<tr>"
-                    + "<td>" +nomeCliente + "</td>"
+                    + "<td>" + nomeCliente + "</td>"
                     + "<td>" + tituloLivro + "</td>"
                     + "<td>" + emprestimo.getDataDev() + "</td>"
-                    + "<td><form action=LivroSrv?acao=pre-edicao method='POST'>"
+                    + "<td><form action=EmprestimoSrv?acao=pre-edicao method='POST'>"
                     + "<input type='hidden' name='id' value="
                     + emprestimo.getId() + "><input type='submit'class='btnBody' value=editar>"
-                     + "<i class=\"material-icons\">assignment</i></form></td>"
+                    + "<i class=\"material-icons\">assignment</i></form></td>"
                     + "</form></td>"
-                    + "<form action=LivroSrv?acao=exclusao method='POST'>"
+                    + "<form action=EmprestimoSrv?acao=exclusao method='POST'>"
                     + "<td><input type='hidden' name='id' value="
                     + emprestimo.getId() + "><input type='submit'class='btnBody' value=deletar><i class='material-icons'>delete</i></td>"
                     + "</form>"
@@ -183,21 +176,21 @@ public class EmprestimoSrv extends HttpServlet {
             System.out.println(ex.getMessage());
         }
         String listaHTML = "";
-        ClienteDaoJpa daoCliente= new ClienteDaoJpa();
-        LivroDaoJpa daoLivro= new LivroDaoJpa();
+        ClienteDaoJpa daoCliente = new ClienteDaoJpa();
+        LivroDaoJpa daoLivro = new LivroDaoJpa();
         for (Emprestimo emprestimo : lista) {
-            String nomeCliente= daoCliente.pesquisarPorId(emprestimo.getClienteId()).getNome();
-            String tituloLivro= daoLivro.pesquisarPorId(emprestimo.getLivroId()).getTitulo();
+            String nomeCliente = daoCliente.pesquisarPorId(emprestimo.getClienteId()).getNome();
+            String tituloLivro = daoLivro.pesquisarPorId(emprestimo.getLivroId()).getTitulo();
             listaHTML = listaHTML
                     + "<tr>"
                     + "<td>" + nomeCliente + "</td>"
                     + "<td>" + tituloLivro + "</td>"
                     + "<td>" + emprestimo.getDataDev() + "</td>"
-                    + "<td><form action=livro?acao=pre-edicao method='POST'>"
+                    + "<td><form action=EmprestimoSrv?acao=pre-edicao method='POST'>"
                     + "<input type='hidden' name='id' value="
                     + emprestimo.getId() + "><input type='submit' value=editar>"
                     + "</form></td>"
-                    + "<form action=livroSrv?acao=exclusao method='POST'>"
+                    + "<form action=EmprestimoSrv?acao=exclusao method='POST'>"
                     + "<td><input type='hidden' name='id' value="
                     + emprestimo.getId() + "><input type='submit' value=excluir></td>"
                     + "</form>"
@@ -205,7 +198,6 @@ public class EmprestimoSrv extends HttpServlet {
         }
         return listaHTML;
     }
-
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
