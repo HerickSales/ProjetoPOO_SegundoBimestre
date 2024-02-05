@@ -136,7 +136,6 @@ h1 {
 
 .table-content {
   height: 32rem;
-
   overflow-y: auto;
 }
 
@@ -305,9 +304,23 @@ tbody tr:nth-child(odd) {
     flex-direction: row;
 
 }
-.form-wrapper {
-    display: flex; /* Utiliza um modelo de layout flexível */
-    gap: 10px; /* Espaçamento entre os formulários */
+
+.container-modal-table{
+    width: 80%;
+    align-content: center;
+    margin: 2rem;
+    overflow: auto;
+    
+}
+
+.modal-Table{
+   
+    
+    
+    
+    
+    
+    
 }
 
 

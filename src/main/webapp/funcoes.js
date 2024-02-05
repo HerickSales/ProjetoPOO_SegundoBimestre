@@ -33,7 +33,7 @@ function verificaCampos(campo1, campo2,campo3){
 
 
 
-function limpaCamposCliente(modal) {
+function limpaCamposCliente(modal,open) {
    
 
     let nome = document.querySelector("#nome");
@@ -42,28 +42,36 @@ function limpaCamposCliente(modal) {
     nome.value = "";
     email.value = "";
     telefone.value = "";
+        if(open===false){
     modal.style.display = "none";
+    }
 }
 
-function limpaCamposLivros(modal) {
+function limpaCamposLivros(modal,open) {
+    console.log(open)
     let titulo = document.querySelector("#titulo");
     let autor = document.querySelector("#autor");
     let preco = document.querySelector("#preco");
     titulo.value = "";
     autor.value = "";
-    preco.value = 0;
-
+    preco.value = 0.0;
+    
+    if(open===false){
     modal.style.display = "none";
+    }
+    
 }
 
-function limpaCamposEmprestimo(modal) {
+function limpaCamposEmprestimo(modal,open) {
     let cliente = document.querySelector("#cliente");
     let livro = document.querySelector("#livro");
     let data = document.querySelector("#data");
     cliente.value = "";
     livro.value = "";
     data.value = "";
+        if(open===false){
     modal.style.display = "none";
+    }
 }
 
 

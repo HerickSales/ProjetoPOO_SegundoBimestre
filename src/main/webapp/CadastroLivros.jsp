@@ -66,8 +66,8 @@
                     <div class="header">
                         <h1>Livros</h1>
 
-                        <button id="btnCadastrar" onclick="showModal(modal)">
-                            <span> Cadastrar Livro </span>
+                        <button id="btnCadastrar" onclick="showModal(modal), limpaCamposLivros(modal,true)">
+                            <span> Cadastrar Cliente </span>
                         </button>
                     </div>
                     <div id="modal" class="modal">
@@ -75,7 +75,7 @@
                             <div class="modal-header-style">
                                 <div class="modal-header">
                                     <h1>Cadastro de Livros</h1>
-                                    <button class="modal-close" id="btnModalClose" onclick="limpaCamposLivros(modal)">
+                                    <button class="modal-close" id="btnModalClose" onclick="limpaCamposLivros(modal,false)">
                                         <i class="material-icons">close</i>
                                     </button>
                                 </div>
@@ -100,7 +100,7 @@
                                     <input type="number" oninput="verificaCampos(titulo.value,autor.value,preco.value)"
                                            name="preco" id="preco" value=<%=preco%> >
 
-                                    <input type="submit" value="Salvar" id="btnSalvar">
+                                    <input type="submit" value="Salvar" id="btnSalvar" >
                                 </div>
                             </form>
                         </div>
@@ -128,13 +128,13 @@
                     </div>
                 </div>
             </main>
-                                                <script>
-                                 let acao = "<%=acao%>";
-                                 if (acao === "edicao") {
-                                     modal.style.display = 'block';
-                                 }
+<script>
+            let acao = "<%=acao%>";
 
-                    </script>
+            if (acao === "edicao") {
+                modal.style.display = 'block';
+            }
+</script>
         </div>
         <script src="./funcoes.js"></script>
     </body>

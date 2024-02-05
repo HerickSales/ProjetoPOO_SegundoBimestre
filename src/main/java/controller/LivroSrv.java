@@ -140,7 +140,7 @@ public class LivroSrv extends HttpServlet {
                     + "<tr>"
                     + "<td>" + livro.getTitulo() + "</td>"
                     + "<td>" + livro.getAutor() + "</td>"
-                    + "<td>" + livro.getPreco() + "</td>"
+                    + "<td> R$" + livro.getPreco() + "</td>"
                     + "<td><form action=LivroSrv?acao=pre-edicao method='POST'>"
                     + "<input type='hidden' name='id' value="
                     + livro.getId() + "><input type='submit'class='btnBody' value=editar>"

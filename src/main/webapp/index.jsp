@@ -74,7 +74,7 @@
                     <div class="header">
                         <h1>Emprestimos</h1>
 
-                        <button id="btnCadastrar" onclick="showModal(modal)">
+                        <button id="btnCadastrar" onclick="showModal(modal),limpaCamposEmprestimo(modal,true)">
                             <span> Novo Emprestimo </span>
                         </button>
                     </div>
@@ -83,7 +83,7 @@
                             <div class="modal-header-style">
                                 <div class="modal-header">
                                     <h1>Realizar de Emprestimos</h1>
-                                    <button class="modal-close" id="btnModalClose" onclick="limpaCamposEmprestimo(modal)">
+                                    <button class="modal-close" id="btnModalClose" onclick="limpaCamposEmprestimo(modal,false)">
                                         <i class="material-icons">close</i>
                                     </button>
                                 </div>
@@ -100,18 +100,17 @@
                                     <label for="inpTitulo">Cliente</label>
                                     <input type="text" oninput="filtraElem(cliente.value, '#tbodyModalCliente tr')"
                                            name="cliente" id="cliente" value="<%=cliente%>">
-                                    <div class="table-content">
-                                        <table>
+                                    <div class="container-modal-table">
+                                        <table class="modal-Table">
                                             <thead>
                                                 <tr>
                                                     <th>Nome</th>
                                                     <th>Email</th>
                                                     <th>selecao</th>
-                                                    <th></th>
-                                                   
+                                               
                                                 </tr>
                                             </thead>
-                                            <tbody id='tbodyModalCliente' >
+                                            <tbody id="tdobyModalCliente">
                                                 <%= listaClientes%>
                                             </tbody>
                                         </table>
@@ -121,8 +120,8 @@
 
                                     <input type="text" oninput="filtraElem(livro.value, '#tbodyModalLivro tr')"
                                            name="livro" id="livro" value="<%=livro%>" >
-                                    <div class="table-content">
-                                        <table>
+                                    <div class="container-modal-table" >
+                                        <table class="modal-Table">
                                             <thead>
                                                 <tr>
                                                     <th>titulo</th>
@@ -130,7 +129,7 @@
                                                     <th>selecao</th>
                                                 </tr>           
                                             </thead>
-                                            <tbody id='tbodyModalLivro' >
+                                            <tbody id="tbodyModalLivro">
                                                 <%= listaLivros%>
                                             </tbody>
                                         </table>

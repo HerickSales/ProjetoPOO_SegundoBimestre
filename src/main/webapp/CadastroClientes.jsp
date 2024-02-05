@@ -34,10 +34,6 @@
         }
         ClienteSrv clientSrv = new ClienteSrv();
         String list = clientSrv.listagem();
-        
-        
-
-
 
     %>
 
@@ -65,7 +61,7 @@
                 <div class="container">
                     <div class="header">
                         <h1>Clientes</h1>
-                        <button id="btnCadastrar" onclick="showModal(modal)">
+                        <button id="btnCadastrar" onclick="showModal(modal,true)">
                             <span> Cadastrar Livro </span>
                         </button>
     
@@ -76,7 +72,7 @@
                             <div class="modal-header-style">
                                 <div class="modal-header">
                                     <h1>Cadastro de Clientes</h1>
-                                    <button class="modal-close" id="btnModalClose" onclick= "limpaCamposCliente(modal)">
+                                    <button class="modal-close" id="btnModalClose" onclick= "limpaCamposCliente(modal,false)">
                                         <i class="material-icons">close</i>
                                     </button>
                                 </div>
@@ -100,7 +96,7 @@
                                     <input type="text" oninput="verificaCampos(nome.value,email.value,telefone.value)"
                                            id="telefone" name="telefone" value="<%=telefone%>" />
                                     
-                                    <input id="btnSalvar" type="submit" value="salvar"/>
+                                     <input type="submit" value="Salvar"  id="btnSalvar">
                                 </div>
                             </form>
                                     
@@ -132,9 +128,13 @@
             </main>
  <script>
     let acao= "<%=acao%>";
+
     if(acao==="edicao"){
        modal.style.display='block';
    }
+   
+ 
+   
 
     
     
