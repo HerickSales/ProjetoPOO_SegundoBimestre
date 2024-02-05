@@ -195,8 +195,9 @@ public class LivroSrv extends HttpServlet {
             listaHTML = listaHTML
                     + "<tr>"
                     + "<td>" + livro.getTitulo() + "</td>"
-                    + "<td>" + livro.getAutor() +
-                    " </td> <td><button style='background-color: #ffd167' type='button' value='"+livro.getId()+"' class='btnLivro' >Selecionar </button></td>"
+                    + "<td>" + livro.getAutor() 
+                    +" </td> <td><button style='background-color: #ffd167' type='button'"
+                    + " value='"+livro.getId()+"' class='btnLivro' id='"+livro.getTitulo()+"' >Selecionar </button></td>"
                     + "</tr>";
         }
             

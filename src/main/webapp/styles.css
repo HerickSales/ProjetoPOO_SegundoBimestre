@@ -305,6 +305,10 @@ tbody tr:nth-child(odd) {
     flex-direction: row;
 
 }
+.form-wrapper {
+    display: flex; /* Utiliza um modelo de layout flexível */
+    gap: 10px; /* Espaçamento entre os formulários */
+}
 
 
 

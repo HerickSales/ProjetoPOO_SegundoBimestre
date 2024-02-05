@@ -51,15 +51,6 @@ public class ClienteSrv extends HttpServlet {
             InterfaceDao dao = new ClienteDaoJpa();
             RequestDispatcher rd;
             Cliente c = null;
-            
-            
-            //System.out.println(acao);
-            //System.out.println(nome);
-
-            
-     
-
-
 
             switch (acao) {
                 case "inclusao":
@@ -191,8 +182,9 @@ public class ClienteSrv extends HttpServlet {
             listaHTML = listaHTML
                     + "<tr>"
                     + "<td>" + cliente.getNome() + "</td>"
-                    + "<td>" + cliente.getEmail() +
-                    " </td> <td><button style='background-color: #ffd167' type='button' value='"+cliente.getId()+"' class='btnCliente'>Selecionar </button></td>"
+                    + "<td>" + cliente.getEmail() 
+                    +" </td> <td><button style='background-color: #ffd167' type='button'"
+                    + " value='"+cliente.getId()+"' class='btnCliente' id='"+cliente.getNome()+"'>Selecionar </button></td>"
                     + "</tr>";
         }
             

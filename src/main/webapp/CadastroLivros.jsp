@@ -28,7 +28,7 @@
         String titulo = request.getParameter("titulo");
         String autor = request.getParameter("autor");
         String preco = request.getParameter("preco");
-        System.out.println(titulo); 
+      
 
         LivroSrv srv = new LivroSrv();
         String list = srv.listagem();
@@ -115,7 +115,9 @@
                                     <th>Título</th>
                                     <th>Autor(es)</th>
                                     <th>Preço</th>
-                                    <<th>Ações</th>
+                                    <th>editar</th>
+                                    <th>excluir</th>
+                                   
                                 </tr>
                             </thead>
 

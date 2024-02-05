@@ -107,6 +107,8 @@
                                                     <th>Nome</th>
                                                     <th>Email</th>
                                                     <th>selecao</th>
+                                                    <th></th>
+                                                   
                                                 </tr>
                                             </thead>
                                             <tbody id='tbodyModalCliente' >
@@ -155,7 +157,8 @@
                                     <th>Cliente</th>
                                     <th>Livro(es)</th>
                                     <th>DataDev</th>
-                                    <th>Acões</th>
+                                    <th>editar</th>
+                                    <th>excluir</th>
                                 </tr>
                             </thead>
 
@@ -172,6 +175,8 @@
                     let acao = "<%=acao%>";
                     let btnCliente = document.querySelectorAll(".btnCliente");
                     let btnLivro = document.querySelectorAll(".btnLivro");
+                    let inpCliente= document.querySelector("#cliente");
+                    let inpLivro= document.querySelector("#livro")
                     let clienteId = document.querySelector("#clienteId");
                     let livroId = document.querySelector("#livroId");
                     let modal = document.querySelector("#modal");
@@ -182,12 +187,15 @@
                     btnCliente.forEach((btn) => {
                         btn.onclick = function () {
                             clienteId.value = this.value;
+                            inpCliente.value=this.id;
                             verificaCampos(clienteId.value, livroId.value, data.value);
+                            
                         };
                     });
                     btnLivro.forEach((btn) => {
                         btn.onclick = function () {
                             livroId.value = this.value;
+                            inpLivro.value= this.id;
                             verificaCampos(clienteId.value, livroId.value, data.value);
                         };
                     });

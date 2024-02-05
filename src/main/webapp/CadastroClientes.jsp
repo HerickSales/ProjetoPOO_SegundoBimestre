@@ -116,7 +116,8 @@
                                     <th>Nome</th>
                                     <th>Email</th>
                                     <th>Telefone</th>
-                                    <th class="actions"> Ações</th>
+                                    <th>editar</th>
+                                    <th>excluir</th>
                                 </tr>
                             </thead>
 
