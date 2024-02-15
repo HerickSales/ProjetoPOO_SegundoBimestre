@@ -98,7 +98,7 @@
                                     <input type="hidden" name="livroId" id='livroId' value=<%=livroId%>>
 
                                     <label for="inpTitulo">Cliente</label>
-                                    <input type="text" oninput="filtraElem(cliente.value, '#tbodyModalCliente tr')"
+                                    <input type="text" oninput="filtraElem(this.value, '#tbodyModalCliente tr')"
                                            name="cliente" id="cliente" value="<%=cliente%>">
                                     <div class="container-modal-table">
                                         <table class="modal-Table">
@@ -110,7 +110,7 @@
                                                
                                                 </tr>
                                             </thead>
-                                            <tbody id="tdobyModalCliente">
+                                            <tbody id="tbodyModalCliente">
                                                 <%= listaClientes%>
                                             </tbody>
                                         </table>
@@ -118,7 +118,7 @@
 
                                     <label for="inpAutor">Titulo do Livro</label>   
 
-                                    <input type="text" oninput="filtraElem(livro.value, '#tbodyModalLivro tr')"
+                                    <input type="text" oninput="filtraElem(this.value, '#tbodyModalLivro tr')"
                                            name="livro" id="livro" value="<%=livro%>" >
                                     <div class="container-modal-table" >
                                         <table class="modal-Table">

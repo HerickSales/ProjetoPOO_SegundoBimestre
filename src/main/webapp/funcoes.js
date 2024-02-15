@@ -80,14 +80,17 @@ function limpaCamposEmprestimo(modal,open) {
  function filtraElem(filtro, id) {
             filtro = filtro.toLowerCase();
             var linhas = document.querySelectorAll(id);
+            console.log(filtro);
+            
 
-            linhas.forEach(function(linha) {
+            linhas.forEach((linha)=> {
                 var nomeCliente = linha.querySelector('td:first-child').innerText.toLowerCase();
 
-                if (nomeCliente.includes(filtro)) {
+                if (nomeCliente.startsWith(filtro)) {
                     linha.style.display = '';
                 } else {
                     linha.style.display = 'none';
                 }
+                
             });
         }
